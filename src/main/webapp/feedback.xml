@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE feedbacks SYSTEM "feedback.dtd">
+
+<feedbacks
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="feedback.xsd">
+
+    <feedback>
+
+        <name>Kavi</name>
+        <email>kavi@gmail.com</email>
+        <rating>5</rating>
+        <category>Website</category>
+        <comment>Very good travel website.</comment>
+
+    </feedback>
+
+    <feedback>
+
+        <name>Rahul</name>
+        <email>rahul@gmail.com</email>
+        <rating>3</rating>
+        <category>Destination</category>
+        <comment>More destinations can be added.</comment>
+
+    </feedback>
+
+    <feedback>
+
+        <name>Priya</name>
+        <email>priya@gmail.com</email>
+        <rating>4</rating>
+        <category>Service</category>
+        <comment>Good experience.</comment>
+
+    </feedback>
+
+</feedbacks>

@@ -1,0 +1,14 @@
+<!ELEMENT feedbacks (feedback+)>
+
+<!ELEMENT feedback (name, email, rating, category, comment)>
+
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT rating (#PCDATA)>
+<!ELEMENT category (#PCDATA)>
+<!ELEMENT comment (#PCDATA)>
+
+<!ATTLIST feedbacks
+    xmlns:xsi CDATA #IMPLIED
+    xsi:noNamespaceSchemaLocation CDATA #IMPLIED
+>
