@@ -1,269 +1,140 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
 <html>
-
 <head>
-
+    <meta charset="UTF-8">
     <title>TravelSite - Registration</title>
-
     <link rel="stylesheet" href="style.css">
-
 </head>
-
 <body>
 
 <header>
-
-    <a href="index.jsp" class="logo">
-        ✈ TravelSite
-    </a>
-
+    <a href="index.jsp" class="logo">✈ TravelSite</a>
     <nav>
-
-        <a href="index.jsp">
-            Home
-        </a>
-
-        <a href="destination.jsp">
-            Destinations
-        </a>
-
-        <a href="feedback.jsp">
-            Feedback
-        </a>
-
+        <a href="index.jsp">Home</a>
+        <a href="destination.jsp">Destinations</a>
+        <a href="feedback.jsp">Feedback</a>
+        <a href="feedbackSearch.jsp">Search</a>
+        <a href="contact.jsp">Contact</a>
+        <a href="register.jsp">Register</a>
     </nav>
-
 </header>
 
-
-<section>
-
+<section class="form-container">
     <h2>TravelSite Registration</h2>
 
-
-    <form id="registerForm"
-          action="register"
-          method="post">
-
-
+    <form id="registerForm" action="register" method="post">
         <!-- NAME -->
-
-        <label>Name</label>
-
-        <input type="text"
-               id="name"
-               name="name">
-
-        <span id="nameError"
-              style="color:red;">
-        </span>
-
-
-        <br><br>
-
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter your full name">
+            <span id="nameError" class="error-msg" style="color:red;"></span>
+        </div>
 
         <!-- EMAIL -->
-
-        <label>Email</label>
-
-        <input type="email"
-               id="email"
-               name="email">
-
-        <span id="emailError"
-              style="color:red;">
-        </span>
-
-
-        <br><br>
-
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email address">
+            <span id="emailError" class="error-msg" style="color:red;"></span>
+        </div>
 
         <!-- PASSWORD -->
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Create a password">
+            <span id="passwordError" class="error-msg" style="color:red;"></span>
+        </div>
 
-        <label>Password</label>
+        <!-- GENDER -->
+        <div class="form-group">
+            <label>Gender</label>
+            <div class="radio-group">
+                <input type="radio" id="male" name="gender" value="male">
+                <label for="male">Male</label>
 
-        <input type="password"
-               id="password"
-               name="password">
+                <input type="radio" id="female" name="gender" value="female">
+                <label for="female">Female</label>
+            </div>
+            <span id="genderError" class="error-msg" style="color:red;"></span>
+        </div>
 
-        <span id="passwordError"
-              style="color:red;">
-        </span>
-
-
-        <br><br>
-
-
-        <button type="submit">
-            Register
-        </button>
-
+        <!-- REGISTER BUTTON -->
+        <button type="submit" class="btn-submit">Register</button>
     </form>
 
-
-    <p id="ajaxMessage"
-       style="color:green;">
-    </p>
-
-
+    <p id="ajaxMessage" style="color:green; font-weight:bold; margin-top:15px; text-align:center;"></p>
 </section>
 
+<footer>
+    <p>© 2024 TravelSite · Made with JSP & Servlet</p>
+    <nav>
+        <a href="index.jsp">Home</a>
+        <a href="destination.jsp">Destinations</a>
+        <a href="feedback.jsp">Feedback</a>
+        <a href="feedbackSearch.jsp">Search</a>
+        <a href="contact.jsp">Contact</a>
+        <a href="register.jsp">Register</a>
+    </nav>
+</footer>
 
+<script src="script.js"></script>
 <script>
+document.addEventListener("DOMContentLoaded", function() {
+    var regForm = document.getElementById("registerForm");
+    if (regForm) {
+        regForm.addEventListener("submit", function(event) {
+            // Prevent submission until validated locally
+            event.preventDefault();
 
-document.getElementById("registerForm")
-.addEventListener("submit", function(event) {
+            var nameInput = document.getElementById("name");
+            var emailInput = document.getElementById("email");
+            var passwordInput = document.getElementById("password");
 
-    // Stop normal form submission
-    event.preventDefault();
+            var name = nameInput ? nameInput.value.trim() : "";
+            var email = emailInput ? emailInput.value.trim() : "";
+            var password = passwordInput ? passwordInput.value : "";
 
+            // Clear previous errors
+            document.getElementById("nameError").innerHTML = "";
+            document.getElementById("emailError").innerHTML = "";
+            document.getElementById("passwordError").innerHTML = "";
+            document.getElementById("ajaxMessage").innerHTML = "";
 
-    // Get values
+            var isValid = true;
 
-    let name =
-        document.getElementById("name").value.trim();
-
-    let email =
-        document.getElementById("email").value.trim();
-
-    let password =
-        document.getElementById("password").value;
-
-
-    // Clear previous errors
-
-    document.getElementById("nameError").innerHTML = "";
-
-    document.getElementById("emailError").innerHTML = "";
-
-    document.getElementById("passwordError").innerHTML = "";
-
-    document.getElementById("ajaxMessage").innerHTML = "";
-
-
-    // Create AJAX request
-
-    let xhr = new XMLHttpRequest();
-
-
-    // PHP URL
-
-    let url =
-        "http://localhost/travelsite-php/validate.php"
-        + "?name=" + encodeURIComponent(name)
-        + "&email=" + encodeURIComponent(email)
-        + "&password=" + encodeURIComponent(password);
-
-
-    xhr.open("GET", url, true);
-
-
-    xhr.onreadystatechange = function() {
-
-        if (xhr.readyState === 4) {
-
-            if (xhr.status === 200) {
-
-                try {
-
-                    let result =
-                        JSON.parse(xhr.responseText);
-
-
-                    // PHP validation successful
-
-                    if (result.success) {
-
-                        document.getElementById(
-                            "ajaxMessage"
-                        ).innerHTML =
-                            result.message;
-
-
-                        /*
-                         * PHP validation is successful.
-                         *
-                         * Now submit the same form
-                         * to RegisterServlet.
-                         */
-
-                        document.getElementById(
-                            "registerForm"
-                        ).submit();
-
-                    }
-
-
-                    // PHP validation failed
-
-                    else {
-
-                        if (result.errors.name) {
-
-                            document.getElementById(
-                                "nameError"
-                            ).innerHTML =
-                                result.errors.name;
-
-                        }
-
-
-                        if (result.errors.email) {
-
-                            document.getElementById(
-                                "emailError"
-                            ).innerHTML =
-                                result.errors.email;
-
-                        }
-
-
-                        if (result.errors.password) {
-
-                            document.getElementById(
-                                "passwordError"
-                            ).innerHTML =
-                                result.errors.password;
-
-                        }
-
-                    }
-
-                }
-
-                catch (error) {
-
-                    document.getElementById(
-                        "ajaxMessage"
-                    ).innerHTML =
-                        "Invalid response from PHP.";
-
-                }
-
+            if (name === "") {
+                document.getElementById("nameError").innerHTML = "Please enter your name.";
+                isValid = false;
             }
 
-            else {
-
-                document.getElementById(
-                    "ajaxMessage"
-                ).innerHTML =
-                    "Unable to connect to PHP.";
-
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (email === "") {
+                document.getElementById("emailError").innerHTML = "Please enter your email.";
+                isValid = false;
+            } else if (!emailPattern.test(email)) {
+                document.getElementById("emailError").innerHTML = "Please enter a valid email address.";
+                isValid = false;
             }
 
-        }
+            if (password === "") {
+                document.getElementById("passwordError").innerHTML = "Please enter a password.";
+                isValid = false;
+            } else if (password.length < 4) {
+                document.getElementById("passwordError").innerHTML = "Password must be at least 4 characters long.";
+                isValid = false;
+            }
 
-    };
-
-
-    xhr.send();
-
+            if (isValid) {
+                document.getElementById("ajaxMessage").style.color = "green";
+                document.getElementById("ajaxMessage").innerHTML = "Registration successful! Redirecting...";
+                // Submit form directly to RegisterServlet
+                regForm.submit();
+            }
+        });
+    }
 });
-
 </script>
 
-
 </body>
-
 </html>
