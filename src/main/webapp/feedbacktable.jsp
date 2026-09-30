@@ -18,6 +18,7 @@
         <a href="destination.jsp">Destinations</a>
         <a href="feedback.jsp">Feedback</a>
         <a href="feedbackSearch.jsp">Search</a>
+        <a href="feedbacktable.jsp">Feedback Table</a>
         <a href="contact.jsp">Contact</a>
         <a href="register.jsp">Register</a>
     </nav>
@@ -49,6 +50,7 @@ catch(Exception e) {
         <a href="destination.jsp">Destinations</a>
         <a href="feedback.jsp">Feedback</a>
         <a href="feedbackSearch.jsp">Search</a>
+        <a href="feedbacktable.jsp">Feedback Table</a>
         <a href="contact.jsp">Contact</a>
         <a href="register.jsp">Register</a>
     </nav>

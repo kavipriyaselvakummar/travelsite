@@ -16,6 +16,7 @@
         <a href="destination.jsp">Destinations</a>
         <a href="feedback.jsp">Feedback</a>
         <a href="feedbackSearch.jsp">Search</a>
+        <a href="feedbacktable.jsp">Feedback Table</a>
         <a href="contact.jsp">Contact</a>
         <a href="register.jsp">Register</a>
     </nav>
@@ -73,6 +74,7 @@
         <a href="destination.jsp">Destinations</a>
         <a href="feedback.jsp">Feedback</a>
         <a href="feedbackSearch.jsp">Search</a>
+        <a href="feedbacktable.jsp">Feedback Table</a>
         <a href="contact.jsp">Contact</a>
         <a href="register.jsp">Register</a>
     </nav>
@@ -84,7 +86,6 @@ document.addEventListener("DOMContentLoaded", function() {
     var regForm = document.getElementById("registerForm");
     if (regForm) {
         regForm.addEventListener("submit", function(event) {
-            // Prevent submission until validated locally
             event.preventDefault();
 
             var nameInput = document.getElementById("name");
@@ -95,7 +96,6 @@ document.addEventListener("DOMContentLoaded", function() {
             var email = emailInput ? emailInput.value.trim() : "";
             var password = passwordInput ? passwordInput.value : "";
 
-            // Clear previous errors
             document.getElementById("nameError").innerHTML = "";
             document.getElementById("emailError").innerHTML = "";
             document.getElementById("passwordError").innerHTML = "";
@@ -128,7 +128,6 @@ document.addEventListener("DOMContentLoaded", function() {
             if (isValid) {
                 document.getElementById("ajaxMessage").style.color = "green";
                 document.getElementById("ajaxMessage").innerHTML = "Registration successful! Redirecting...";
-                // Submit form directly to RegisterServlet
                 regForm.submit();
             }
         });

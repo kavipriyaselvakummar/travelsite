@@ -115,19 +115,3 @@ if (welcome && welcome.innerHTML.trim() === "Welcome to TravelSite") {
         document.cookie = "username=" + encodeURIComponent(traveller.trim()) + ";max-age=86400;path=/";
     }
 }
-
-// =============================
-// Feedback Search Form Handler
-// =============================
-
-const feedbackForm = document.getElementById("feedbackSearchForm");
-
-if (feedbackForm) {
-    feedbackForm.addEventListener("submit", function(event) {
-        const rating = document.getElementById("rating").value;
-        if (!rating) {
-            event.preventDefault();
-            alert("Please enter or select a rating.");
-        }
-    });
-}
